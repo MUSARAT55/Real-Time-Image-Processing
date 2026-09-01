@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>VisionLab | Image Processing Studio</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            VL
+        </div>
+
+        <div>
+
+            <h2>
+                Vision<span>Lab</span>
+            </h2>
+
+            <p>
+                IMAGE PROCESSING STUDIO
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="status">
+
+        <span class="status-dot"></span>
+
+        SYSTEM ONLINE
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="container">
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <section class="hero">
+
+        <div>
+
+            <div class="badge">
+                COMPUTER VISION • OPENCV
+            </div>
+
+
+            <h1>
+                Real-Time
+                <span>Image Processing</span>
+            </h1>
+
+
+            <p>
+                Capture images directly from your webcam
+                and transform them using powerful
+                computer vision techniques.
+            </p>
+
+        </div>
+
+
+        <div class="hero-number">
+
+            <strong>14</strong>
+
+            <span>
+                PROCESSING<br>
+                OPERATIONS
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CAMERA + CAPTURED IMAGE
+    ================================================== -->
+
+    <section class="workspace">
+
+
+        <!-- =============================================
+             LIVE CAMERA
+        ============================================== -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-number">
+                        01
+                    </span>
+
+                    <h2>
+                        Live Camera
+                    </h2>
+
+                </div>
+
+
+                <span class="live-badge">
+                    ● LIVE
+                </span>
+
+            </div>
+
+
+            <div class="camera-box">
+
+                <div
+                    id="cameraPlaceholder"
+                    class="camera-placeholder"
+                >
+
+                    <div class="camera-icon">
+                        ◉
+                    </div>
+
+                    <h3>
+                        Camera Ready
+                    </h3>
+
+                    <p>
+                        Start your webcam to begin
+                    </p>
+
+                </div>
+
+
+                <video
+                    id="video"
+                    autoplay
+                    playsinline
+                    muted
+                ></video>
+
+            </div>
+
+
+            <div class="camera-controls">
+
+                <button
+                    class="btn primary"
+                    onclick="startCamera()"
+                >
+                    ▶ Start Camera
+                </button>
+
+
+                <button
+                    class="btn secondary"
+                    onclick="captureImage()"
+                >
+                    ● Capture
+                </button>
+
+
+                <button
+                    class="btn danger"
+                    onclick="stopCamera()"
+                >
+                    ■ Stop
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =============================================
+             CAPTURED IMAGE
+        ============================================== -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-number">
+                        02
+                    </span>
+
+                    <h2>
+                        Captured Image
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="image-box">
+
+                <div
+                    id="captureText"
+                    class="empty-state"
+                >
+
+                    <div class="empty-icon">
+                        +
+                    </div>
+
+                    <h3>
+                        No Image Captured
+                    </h3>
+
+                    <p>
+                        Your captured frame will
+                        appear here
+                    </p>
+
+                </div>
+
+
+                <img
+                    id="capturedImage"
+                    alt="Captured Image"
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PROCESSING
+    ================================================== -->
+
+    <section class="processing-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="panel-number">
+                    03
+                </span>
+
+                <h2>
+                    Image Processing
+                </h2>
+
+                <p>
+                    Select an operation to transform
+                    your captured image.
+                </p>
+
+            </div>
+
+
+            <div class="opencv-label">
+
+                POWERED BY
+
+                <strong>
+                    OpenCV
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             OPERATION BUTTONS
+        ================================================== -->
+
+        <div class="operations">
+
+
+            <!-- 01 ORIGINAL -->
+
+            <button
+                class="operation"
+                onclick="processImage('original')"
+            >
+
+                <span class="operation-number">
+                    01
+                </span>
+
+                <span class="operation-icon">
+                    ◈
+                </span>
+
+                <strong>
+                    Original
+                </strong>
+
+                <small>
+                    View original captured frame
+                </small>
+
+            </button>
+
+
+
+            <!-- 02 GRAYSCALE -->
+
+            <button
+                class="operation"
+                onclick="processImage('gray')"
+            >
+
+                <span class="operation-number">
+                    02
+                </span>
+
+                <span class="operation-icon">
+                    ◐
+                </span>
+
+                <strong>
+                    Grayscale
+                </strong>
+
+                <small>
+                    Convert image into grayscale
+                </small>
+
+            </button>
+
+
+
+            <!-- 03 BINARY -->
+
+            <button
+                class="operation"
+                onclick="processImage('binary')"
+            >
+
+                <span class="operation-number">
+                    03
+                </span>
+
+                <span class="operation-icon">
+                    ◑
+                </span>
+
+                <strong>
+                    Binary
+                </strong>
+
+                <small>
+                    Apply binary thresholding
+                </small>
+
+            </button>
+
+
+
+            <!-- 04 RGB -->
+
+            <button
+                class="operation"
+                onclick="processImage('rgb')"
+            >
+
+                <span class="operation-number">
+                    04
+                </span>
+
+                <span class="operation-icon">
+                    RGB
+                </span>
+
+                <strong>
+                    Gray → RGB
+                </strong>
+
+                <small>
+                    Convert grayscale back to RGB
+                </small>
+
+            </button>
+
+
+
+            <!-- 05 HSV -->
+
+            <button
+                class="operation"
+                onclick="processImage('hsv')"
+            >
+
+                <span class="operation-number">
+                    05
+                </span>
+
+                <span class="operation-icon">
+                    HSV
+                </span>
+
+                <strong>
+                    HSV
+                </strong>
+
+                <small>
+                    Explore HSV color space
+                </small>
+
+            </button>
+
+
+
+            <!-- 06 HISTOGRAM -->
+
+            <button
+                class="operation"
+                onclick="processImage('equalize')"
+            >
+
+                <span class="operation-number">
+                    06
+                </span>
+
+                <span class="operation-icon">
+                    ▥
+                </span>
+
+                <strong>
+                    Histogram
+                </strong>
+
+                <small>
+                    Enhance image distribution
+                </small>
+
+            </button>
+
+
+
+            <!-- 07 CONTRAST -->
+
+            <button
+                class="operation"
+                onclick="processImage('contrast')"
+            >
+
+                <span class="operation-number">
+                    07
+                </span>
+
+                <span class="operation-icon">
+                    ◓
+                </span>
+
+                <strong>
+                    Contrast
+                </strong>
+
+                <small>
+                    Enhance image contrast
+                </small>
+
+            </button>
+
+
+
+            <!-- =================================================
+                 IMAGE SMOOTHING
+            ================================================== -->
+
+
+            <!-- 08 AVERAGE FILTER -->
+
+            <button
+                class="operation"
+                onclick="processImage('average')"
+            >
+
+                <span class="operation-number">
+                    08
+                </span>
+
+                <span class="operation-icon">
+                    ≋
+                </span>
+
+                <strong>
+                    Average Filter
+                </strong>
+
+                <small>
+                    Smooth image using average filter
+                </small>
+
+            </button>
+
+
+
+            <!-- 09 GAUSSIAN FILTER -->
+
+            <button
+                class="operation"
+                onclick="processImage('gaussian')"
+            >
+
+                <span class="operation-number">
+                    09
+                </span>
+
+                <span class="operation-icon">
+                    ≈
+                </span>
+
+                <strong>
+                    Gaussian Filter
+                </strong>
+
+                <small>
+                    Smooth image using Gaussian filter
+                </small>
+
+            </button>
+
+
+
+            <!-- 10 LAPLACIAN -->
+
+            <button
+                class="operation"
+                onclick="processImage('laplacian')"
+            >
+
+                <span class="operation-number">
+                    10
+                </span>
+
+                <span class="operation-icon">
+                    ✦
+                </span>
+
+                <strong>
+                    Laplacian Sharpen
+                </strong>
+
+                <small>
+                    Sharpen image using Laplacian
+                </small>
+
+            </button>
+
+
+
+            <!-- =================================================
+                 MORPHOLOGICAL OPERATIONS
+            ================================================== -->
+
+
+            <!-- 11 EROSION -->
+
+            <button
+                class="operation"
+                onclick="processImage('erosion')"
+            >
+
+                <span class="operation-number">
+                    11
+                </span>
+
+                <span class="operation-icon">
+                    −
+                </span>
+
+                <strong>
+                    Erosion
+                </strong>
+
+                <small>
+                    Shrink foreground regions
+                </small>
+
+            </button>
+
+
+
+            <!-- 12 DILATION -->
+
+            <button
+                class="operation"
+                onclick="processImage('dilation')"
+            >
+
+                <span class="operation-number">
+                    12
+                </span>
+
+                <span class="operation-icon">
+                    +
+                </span>
+
+                <strong>
+                    Dilation
+                </strong>
+
+                <small>
+                    Expand foreground regions
+                </small>
+
+            </button>
+
+
+
+            <!-- 13 OPENING -->
+
+            <button
+                class="operation"
+                onclick="processImage('opening')"
+            >
+
+                <span class="operation-number">
+                    13
+                </span>
+
+                <span class="operation-icon">
+                    ◇
+                </span>
+
+                <strong>
+                    Opening
+                </strong>
+
+                <small>
+                    Remove small image noise
+                </small>
+
+            </button>
+
+
+
+            <!-- 14 CLOSING -->
+
+            <button
+                class="operation"
+                onclick="processImage('closing')"
+            >
+
+                <span class="operation-number">
+                    14
+                </span>
+
+                <span class="operation-icon">
+                    ◆
+                </span>
+
+                <strong>
+                    Closing
+                </strong>
+
+                <small>
+                    Fill small holes
+                </small>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RESULT
+    ================================================== -->
+
+    <section class="result-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="panel-number">
+                    04
+                </span>
+
+                <h2>
+                    Processed Result
+                </h2>
+
+            </div>
+
+
+            <div
+                id="processingStatus"
+                class="processing-status"
+            >
+                READY
+            </div>
+
+        </div>
+
+
+        <div class="result-container">
+
+
+            <div
+                id="processedText"
+                class="result-placeholder"
+            >
+
+                <div class="result-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    Processing Output
+                </h3>
+
+                <p>
+                    Select an operation above to
+                    generate your result.
+                </p>
+
+            </div>
+
+
+            <img
+                id="processedImage"
+                alt="Processed Image"
+            >
+
+        </div>
+
+
+        <div class="result-controls">
+
+            <button
+                id="downloadBtn"
+                class="btn download"
+                onclick="downloadImage()"
+                disabled
+            >
+                ↓ Download Result
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         INFO CARDS
+    ================================================== -->
+
+    <section class="info-section">
+
+
+        <div class="info-card">
+
+            <span>
+                01
+            </span>
+
+            <h3>
+                Capture
+            </h3>
+
+            <p>
+                Use your webcam to capture
+                a real-time image.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <span>
+                02
+            </span>
+
+            <h3>
+                Smooth
+            </h3>
+
+            <p>
+                Apply average and Gaussian
+                filters to smooth images.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <span>
+                03
+            </span>
+
+            <h3>
+                Morphology
+            </h3>
+
+            <p>
+                Apply erosion, dilation,
+                opening and closing.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <span>
+                04
+            </span>
+
+            <h3>
+                Download
+            </h3>
+
+            <p>
+                Save the processed image
+                directly to your computer.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+    <div>
+
+        <strong>
+            VisionLab
+        </strong>
+
+        <span>
+            Image Processing Studio
+        </span>
+
+    </div>
+
+
+    <p>
+        Built with Python • Flask • OpenCV
+    </p>
+
+</footer>
+
+
+
+<!-- =====================================================
+     HIDDEN CANVAS
+====================================================== -->
+
+<canvas id="canvas"></canvas>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script
+    src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+
+</body>
+
+</html>
