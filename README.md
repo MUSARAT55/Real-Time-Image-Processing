@@ -28,22 +28,13 @@ and Computer Vision through a simple and interactive application.
 
 ## 👥 Project Team
 
-| Sl. No. | Student Name | Role / Responsibility |
+| Sl. No. | Student Name 
 |---|---|---|
-| 1 | __________________ | Team Leader & Project Coordination |
-| 2 | __________________ | Python & OpenCV Development |
-| 3 | __________________ | Image Processing & Testing |
-| 4 | _________TEAM MEMBERS 
+| 1 |MAHALAKSHMEE BADIGER
+| 2 |MEHRUNBEE MULLA  
+| 3 | VIKAS 
+| 4 |SATISH TEAM MEMBERS 
 
-SL NO                    MEMBERS 
-
-1                MAHALAKSHMEE BADIGER 
-
-2                MEHRUNBEE MULLA 
-
-3                VIKAS 
-
-4                SATISH 
 
 _________ | Documentation & Presentation |  _________
 
