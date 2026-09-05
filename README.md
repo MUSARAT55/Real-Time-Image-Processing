@@ -28,12 +28,12 @@ and Computer Vision through a simple and interactive application.
 
 ## 👥 Project Team
 
-| Sl. No. | Student Name 
-|---|---|---|
-| 1 |MAHALAKSHMEE BADIGER
-| 2 |MEHRUNBEE MULLA  
-| 3 | VIKAS 
-| 4 |SATISH TEAM MEMBERS 
+| Sl. No. | Student Name |
+|---|---
+| 1 |MAHALAKSHMEE BADIGER|
+| 2 |MEHRUNBEE MULLA  |
+| 3 | VIKAS |
+| 4 |SATISH TEAM MEMBERS |
 
 
 _________ | Documentation & Presentation |  _________
